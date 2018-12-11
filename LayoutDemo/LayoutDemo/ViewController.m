@@ -18,9 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIView *bgview = [[UIView alloc]init];
+    bgview.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:bgview];
     NSArray *array = @[@"东方大厦",@"方法",@"反反复复反反复复",@"共",@"大声点大叔的",@"f",@"都撒到",@"大声点啊到底",@"得到的",@"点点滴滴的",@"是官方广告",@"刚刚",@"刚刚好",@"斤斤计较",@"胡特如图",@"后天如火如荼"];
     CGFloat x = 15;
-    CGFloat y = 100;
+    CGFloat y = 10;
     for (int i=0; i<array.count; i++) {
         CGFloat width = [self calculatedStringWidth:array[i] WithSize:CGSizeMake(MAXFLOAT, 30) font:15]+30;
         if (x+width+10>ScreenW) {
@@ -30,8 +33,9 @@
         UIButton *btn = [self UIButtonWithFrame:CGRectMake(x, y, width, 30) backgroundColor:[UIColor greenColor] title:array[i] image:nil selectImage:nil font:15 textColor:[UIColor whiteColor] selectTextColor:[UIColor whiteColor] edgeInsets:UIEdgeInsetsZero tag:i target:self action:@selector(btnClick:)];
         btn.layer.cornerRadius = 5;
         x = x + width + 10;
-        [self.view addSubview:btn];
+        [bgview addSubview:btn];
     }
+    bgview.frame = CGRectMake(0, 100, ScreenW, y+40);
 }
 
 -(void)btnClick:(UIButton *)btn{
