@@ -21,18 +21,24 @@
     UIView *bgview = [[UIView alloc]init];
     bgview.backgroundColor = [UIColor grayColor];
     [self.view addSubview:bgview];
-    NSArray *array = @[@"东方大厦",@"方法",@"反反复复反反复复",@"共",@"大声点大叔的",@"f",@"都撒到",@"大声点啊到底",@"得到的",@"点点滴滴的",@"是官方广告",@"刚刚",@"刚刚好",@"斤斤计较",@"胡特如图",@"后天如火如荼"];
+    NSArray *array = @[@"东方大厦",@"方法",@"反反复复反反但是范德萨发生的发生的范德萨发生的服范德萨发撒发的方式打发复复",@"共",@"大声点大叔的",@"f",@"都撒到",@"大声点啊到底",@"得到的",@"点点滴滴的",@"是官方广告",@"刚刚",@"刚刚好",@"斤斤计较",@"胡特如图",@"后天如火如荼"];
     CGFloat x = 15;
     CGFloat y = 10;
+    BOOL isBeyondWidth = NO;//是否超出屏幕
     for (int i=0; i<array.count; i++) {
         CGFloat width = [self calculatedStringWidth:array[i] WithSize:CGSizeMake(MAXFLOAT, 30) font:15]+30;
         if (x+width+10>ScreenW) {
             x = 15;
             y += 40;
         }
-        UIButton *btn = [self UIButtonWithFrame:CGRectMake(x, y, width, 30) backgroundColor:[UIColor greenColor] title:array[i] image:nil selectImage:nil font:15 textColor:[UIColor whiteColor] selectTextColor:[UIColor whiteColor] edgeInsets:UIEdgeInsetsZero tag:i target:self action:@selector(btnClick:)];
+        if (width>(ScreenW-30)) {
+            width = ScreenW-30;
+            isBeyondWidth = YES;
+        }
+        UIButton *btn = [self UIButtonWithFrame:CGRectMake(x, y, width, 30) backgroundColor:[UIColor greenColor] title:array[i] image:nil selectImage:nil font:15 textColor:[UIColor whiteColor] selectTextColor:[UIColor whiteColor] edgeInsets:isBeyondWidth?UIEdgeInsetsMake(0, 10, 0, 10):UIEdgeInsetsZero tag:i target:self action:@selector(btnClick:)];
         btn.layer.cornerRadius = 5;
         x = x + width + 10;
+        isBeyondWidth = NO;
         [bgview addSubview:btn];
     }
     bgview.frame = CGRectMake(0, 100, ScreenW, y+40);
